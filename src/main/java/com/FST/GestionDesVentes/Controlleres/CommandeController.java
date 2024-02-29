@@ -21,65 +21,46 @@ import com.FST.GestionDesVentes.Repositories.CommandeRepository;
 import jakarta.validation.Valid;
 
 
-
 @RestController
 @RequestMapping("/commandes")
-@CrossOrigin (origins="*")
+@CrossOrigin(origins = "*")
 public class CommandeController {
-	
 
-	@Autowired 
-	private CommandeRepository commanderepository ;
-	
 
-	
-	@GetMapping("/list")
-	public List<Commande> getAllCommandes(){ 
-	return (List<Commande>) commanderepository.findAll() ;
-	}
-	
-	
-	@PostMapping ("/add")
-	public  Commande createCommande (@Valid @RequestBody Commande commande) {
-	
-	return commanderepository.save(commande);
+    @Autowired
+    private CommandeRepository commanderepository;
 
-	}
-	
-	
-	@PutMapping ("/{commandeId}")
-	public Commande updateCommande (@PathVariable Long commandeId ,@Valid @RequestBody Commande commandeRequest) {
-		
-		return commanderepository.findById(commandeId).map(commande ->{
-			commande.setDate(commandeRequest.getDate());
-		    commande.setTotal(commandeRequest.getTotal());
-		    commande.setStatut(commandeRequest.getStatut());
-		    commande.setMethodePaiement(commandeRequest.getMethodePaiement());
-		    commande.setAdresseClient(commandeRequest.getAdresseClient());
-		    return commanderepository.save(commande);
-		    
-		}).orElseThrow(() -> new IllegalArgumentException("CommandeId" + "commandeId" + " not found"));	
-	}
-	
 
-	@DeleteMapping("/{commandeId}")
-	 public ResponseEntity<?> deleteClient (@PathVariable Long commandeId ){
-		return commanderepository.findById(commandeId).map(commande ->{
-			commanderepository.delete(commande);
-			return ResponseEntity .ok().build();
-		}).orElseThrow(() -> new IllegalArgumentException("CommandeId" + "commandeId" + " not found"));
-	}
-	
-	
-	@GetMapping ("/{commandeId}")
-	public Commande getCommande (@PathVariable Long commandeId ) {
-		Optional <Commande> c =commanderepository.findById(commandeId);
-		return c.get();
-		
-	}
-	
-	
-	
-	
-	
+    @GetMapping("/list")
+    public List<Commande> getAllCommandes() {
+        return commanderepository.findAll();
+    }
+
+
+    @PostMapping("/add")
+    public Commande createCommande(@RequestBody Commande commande) {
+        return commanderepository.save(commande);
+    }
+
+
+
+
+
+    @DeleteMapping("/{commandeId}")
+    public ResponseEntity<?> deleteClient(@PathVariable Long commandeId) {
+        return commanderepository.findById(commandeId).map(commande -> {
+            commanderepository.delete(commande);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new IllegalArgumentException("CommandeId" + "commandeId" + " not found"));
+    }
+
+
+    @GetMapping("/{commandeId}")
+    public Commande getCommande(@PathVariable Long commandeId) {
+        Optional<Commande> c = commanderepository.findById(commandeId);
+        return c.get();
+
+    }
+
+
 }

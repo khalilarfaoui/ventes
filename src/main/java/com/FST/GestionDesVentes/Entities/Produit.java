@@ -24,31 +24,22 @@ public class Produit {
 	@GeneratedValue( strategy= GenerationType.AUTO)
 	private long id ;
 	
-	@NotBlank(message = "Le nom est obligatoire")
-	@Column (name="Nom")
 	private String nom;
 	
-	@Column (name="Description")
 	private String description;
 	
-	@NotNull(message = "Le prix est obligatoire")
-	@Column (name="Prix")
 	private Double prix ;
 	
-	@NotNull(message = "Le stock est obligatoire")
-	@Column (name="Stock")
 	private int stock ;
 	
 
-	@Column (name="DateCreation")
-	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date dateCreation ;
 
 
 
 	@ManyToOne
 	private Categorie category;
-	@Column (name="Image")
+
 	private String image  ;
 	
 
