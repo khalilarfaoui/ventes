@@ -15,7 +15,8 @@ import com.FST.GestionDesVentes.Repositories.ProduitRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping({"/produits", "/home*"})
+//@RequestMapping({"/produits", "/home*"})
+@RequestMapping("/produits")
 @CrossOrigin(origins = "*")
 public class ProduitController {
 

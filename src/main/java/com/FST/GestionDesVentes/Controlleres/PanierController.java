@@ -2,7 +2,6 @@ package com.FST.GestionDesVentes.Controlleres;
 
 import com.FST.GestionDesVentes.Entities.Commande;
 import com.FST.GestionDesVentes.Entities.Panier;
-import com.FST.GestionDesVentes.Entities.Produit;
 import com.FST.GestionDesVentes.Repositories.CommandeRepository;
 import com.FST.GestionDesVentes.Repositories.PanierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +39,31 @@ public class PanierController {
         Panier panier = panierRepository.findById(idPanier).orElse(null);
         Commande commande = commandeRepository.findById(idCommande).orElse(null);
 
+
         panier.addCommande(commande);
         panier.setId(idPanier);
         return panierRepository.save(panier);
     }
+
+    @GetMapping("removeCommandeFromPanier/{idPanier}/{idCommande}")
+    public Panier removeCommandeFromPanier(@PathVariable long idPanier , @PathVariable long idCommande){
+        Panier panier = panierRepository.findById(idPanier).orElse(null);
+        Commande commande = commandeRepository.findById(idCommande).orElse(null);
+
+        panier.removeCommande(commande);
+        panier.setId(idPanier);
+        return panierRepository.save(panier);
+    }
+
+
+    @GetMapping("findPanierById/{id}")
+    public Panier findPanierById(@PathVariable long id){
+        return panierRepository.findById(id).orElse(null);
+    }
+
+
+
+
 
 
 }

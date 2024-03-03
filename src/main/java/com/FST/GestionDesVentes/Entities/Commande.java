@@ -21,7 +21,7 @@ public class Commande {
 
     private int quantity ;
 
-    @OneToOne
+    @ManyToOne
     private Produit produit;
 
 

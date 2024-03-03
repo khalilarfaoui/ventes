@@ -16,12 +16,19 @@ public class Panier {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
+
+
 	@OneToMany
 	private List<Commande> commandeList;
 
 
 	public void addCommande(Commande commande){
 		this.commandeList.add(commande);
+	}
+
+	public void removeCommande(Commande commande){
+		this.commandeList.remove(commande);
 	}
 	
 	

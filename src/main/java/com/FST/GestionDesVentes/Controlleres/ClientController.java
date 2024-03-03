@@ -22,7 +22,8 @@ import com.FST.GestionDesVentes.Repositories.CommandeRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping({"/clients", "/home*"})
+//@RequestMapping({"/clients", "/home*"})
+@RequestMapping("/clients")
 @CrossOrigin(origins = "*")
 public class ClientController {
 
