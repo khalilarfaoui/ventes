@@ -40,20 +40,20 @@ public class CategorieController {
 
 
     @GetMapping("/findById/{id}")
-    public ResponseEntity<Categorie> getCategoryById(@PathVariable long id){
-        Categorie categorie = categorierepository.findById(id).orElse(null) ;
-        if(categorie == null){
+    public ResponseEntity<Categorie> getCategoryById(@PathVariable long id) {
+        Categorie categorie = categorierepository.findById(id).orElse(null);
+        if (categorie == null) {
             return ResponseEntity.noContent().build();
-        }else{
+        } else {
             return ResponseEntity.ok(categorie);
         }
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> updateCategorie(@PathVariable long id , @RequestBody Categorie categorie){
-        if(!categorierepository.existsById(id)){
+    public ResponseEntity<?> updateCategorie(@PathVariable long id, @RequestBody Categorie categorie) {
+        if (!categorierepository.existsById(id)) {
             return ResponseEntity.notFound().build();
-        }else{
+        } else {
             categorie.setId(id);
             Categorie updatedCategory = categorierepository.save(categorie);
             return ResponseEntity.ok(updatedCategory);
